@@ -2,102 +2,85 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-        
-    - name: Setup Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-        
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-      
-    - name: Install pnpm
-      run: npm install -g pnpm
-      
-    - name: Install dependencies
-      run: pnpm install
-      
-    - name: Build web app
-      run: pnpm run build
-      
-    - name: Sync Capacitor
-      run: npx cap sync android
-      
-    - name: Grant execute permission for gradlew
-      run: chmod +x android/gradlew
-      
-    - name: Build APK
-      run: |
-        cd android
-        ./gradlew assembleDebug --no-daemon
-        
-    - name: Upload APK as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: crypto-recommendations-apk
-        path: android/app/build/outputs/apk/debug/app-debug.apk
-        retention-days: 30
-        
-    - name: Create Release
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v1.0.${{ github.run_number }}
-        release_name: Release v1.0.${{ github.run_number }}
-        body: |
-          🚀 **تطبيق توصيات العملات الرقمية - إصدار جديد**
-          
-          ## الميزات الجديدة:
-          - ✅ توصيات ذكية للعملات الرقمية
-          - ✅ دعم منصتي Binance و MEXC
-          - ✅ تحليل فني متقدم باستخدام RSI والمتوسطات المتحركة
-          - ✅ واجهة مستخدم عصرية وسهلة الاستخدام
-          - ✅ دعم الوضع الداكن والفاتح
-          - ✅ تحديث البيانات كل 5 دقائق
-          
-          ## كيفية التثبيت:
-          1. حمل ملف `crypto-recommendations.apk`
-          2. فعل "المصادر غير المعروفة" في إعدادات الأندرويد
-          3. ثبت التطبيق
-          
-          ## ⚠️ تحذير مهم:
-          هذا التطبيق للأغراض التعليمية والمعلوماتية فقط. التداول في العملات الرقمية ينطوي على مخاطر عالية.
-          
-          ---
-          **Build Number**: ${{ github.run_number }}
-          **Commit**: ${{ github.sha }}
-        draft: false
-        prerelease: false
-        
-    - name: Upload Release Asset
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: android/app/build/outputs/apk/debug/app-debug.apk
-        asset_name: crypto-recommendations.apk
-        asset_content_type: application/vnd.android.package-archive
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Install dependencies
+        run: |
+          npm install -g pnpm
+          pnpm install
+
+      - name: Build web app
+        run: pnpm run build
+
+      - name: Setup Capacitor
+        run: |
+          npx cap sync android
+
+      - name: Build APK
+        run: |
+          cd android
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: crypto-recommendations-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          release_name: Release v1.0.${{ github.run_number }}
+          body: |
+            تطبيق توصيات العملات الرقمية - الإصدار التلقائي
+
+            الميزات:
+            - توصيات ذكية للعملات الرقمية
+            - دعم منصتي Binance و MEXC
+            - تحليل فني متقدم
+            - واجهة مستخدم سهلة الاستخدام
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: android/app/build/outputs/apk/debug/app-debug.apk
+          asset_name: crypto-recommendations.apk
+          asset_content_type: application/vnd.android.package-archive
