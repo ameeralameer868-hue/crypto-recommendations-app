@@ -2,11 +2,9 @@ name: Build Android APK
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -41,8 +39,7 @@ jobs:
         run: pnpm run build
 
       - name: Setup Capacitor
-        run: |
-          npx cap sync android
+        run: npx cap sync android
 
       - name: Build APK
         run: |
@@ -57,6 +54,7 @@ jobs:
 
       - name: Create Release
         if: github.ref == 'refs/heads/main'
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
