@@ -1,0 +1,128 @@
+{
+  "market_overview": {
+    "success": true,
+    "data": [
+      {
+        "id": "bitcoin",
+        "name": "Bitcoin",
+        "symbol": "BTC",
+        "price": 67890.50,
+        "change_24h": 2.47,
+        "market_cap": 1340000000000,
+        "volume": 28500000000,
+        "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
+      },
+      {
+        "id": "ethereum",
+        "name": "Ethereum",
+        "symbol": "ETH",
+        "price": 4207.30,
+        "change_24h": -1.38,
+        "market_cap": 506000000000,
+        "volume": 15200000000,
+        "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+      },
+      {
+        "id": "binancecoin",
+        "name": "BNB",
+        "symbol": "BNB",
+        "price": 835.70,
+        "change_24h": 3.25,
+        "market_cap": 121000000000,
+        "volume": 2100000000,
+        "image": "https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png"
+      },
+      {
+        "id": "solana",
+        "name": "Solana",
+        "symbol": "SOL",
+        "price": 189.45,
+        "change_24h": -2.15,
+        "market_cap": 89000000000,
+        "volume": 3400000000,
+        "image": "https://assets.coingecko.com/coins/images/4128/large/solana.png"
+      }
+    ],
+    "timestamp": "2025-08-19T15:53:00.000Z"
+  },
+  "recommendations": {
+    "success": true,
+    "data": [
+      {
+        "id": "binancecoin",
+        "name": "BNB",
+        "symbol": "BNB",
+        "current_price": 835.70,
+        "target_price": 1044.63,
+        "strength": 85,
+        "time_frame": "شهرين",
+        "exchange": "Binance",
+        "reasons": [
+          "السعر أعلى من المتوسط المتحرك 20 يوم",
+          "زيادة كبيرة في حجم التداول",
+          "اتجاه صاعد قوي خلال الأسبوع الماضي"
+        ],
+        "potential_return": 25.0,
+        "risk_level": "منخفضة",
+        "last_updated": "2025-08-19T15:53:00.000Z"
+      },
+      {
+        "id": "cardano",
+        "name": "Cardano",
+        "symbol": "ADA",
+        "current_price": 0.45,
+        "target_price": 0.59,
+        "strength": 78,
+        "time_frame": "شهرين",
+        "exchange": "MEXC",
+        "reasons": [
+          "مؤشر القوة النسبية يشير إلى تشبع بيعي",
+          "إطلاق تحديثات جديدة على الشبكة",
+          "زيادة في عدد المطورين النشطين"
+        ],
+        "potential_return": 31.1,
+        "risk_level": "متوسطة",
+        "last_updated": "2025-08-19T15:53:00.000Z"
+      },
+      {
+        "id": "solana",
+        "name": "Solana",
+        "symbol": "SOL",
+        "current_price": 189.45,
+        "target_price": 227.34,
+        "strength": 72,
+        "time_frame": "3 أشهر",
+        "exchange": "Binance",
+        "reasons": [
+          "السعر أعلى من المتوسط المتحرك 20 يوم",
+          "تحليل فني إيجابي عام",
+          "مؤشرات السوق مواتية"
+        ],
+        "potential_return": 20.0,
+        "risk_level": "متوسطة",
+        "last_updated": "2025-08-19T15:53:00.000Z"
+      },
+      {
+        "id": "polkadot",
+        "name": "Polkadot",
+        "symbol": "DOT",
+        "current_price": 7.85,
+        "target_price": 9.81,
+        "strength": 68,
+        "time_frame": "3 أشهر",
+        "exchange": "MEXC",
+        "reasons": [
+          "مؤشر القوة النسبية يشير إلى تشبع بيعي",
+          "تحليل فني إيجابي عام",
+          "مؤشرات السوق مواتية"
+        ],
+        "potential_return": 25.0,
+        "risk_level": "عالية",
+        "last_updated": "2025-08-19T15:53:00.000Z"
+      }
+    ],
+    "total": 4,
+    "timestamp": "2025-08-19T15:53:00.000Z"
+  }
+}
+
